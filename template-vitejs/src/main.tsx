@@ -1,10 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import { StrictMode } from 'react'
+import { render } from 'react-dom'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+import App from './App'
+
+import 'react-toastify/dist/ReactToastify.min.css'
+
+render(
+  <StrictMode>
     <App />
-  </React.StrictMode>,
+  </StrictMode>,
+  document.getElementById('root'),
 )

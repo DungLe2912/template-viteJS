@@ -1,33 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { CssBaseline } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
+import { QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { MemoryRouter } from 'react-router-dom'
+
+import queryClient from 'apis/utils/queryClient'
+import theme from 'configs/theme'
+
+import { AppRoutesContainer, ErrorBoundary, ToastContainer } from './containers'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <MemoryRouter>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <CssBaseline />
+          <ErrorBoundary>
+            <AppRoutesContainer />
+          </ErrorBoundary>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+        <ToastContainer />
+      </ThemeProvider>
+    </MemoryRouter>
   )
 }
 
